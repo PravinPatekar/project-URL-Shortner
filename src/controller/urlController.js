@@ -1,4 +1,4 @@
-const shortid = require('shortid')
+const shortId = require('shortid')
 const validUrl = require('valid-url')
 const urlModel = require("../model/urlModel")
 
