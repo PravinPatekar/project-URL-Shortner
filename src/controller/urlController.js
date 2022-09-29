@@ -30,7 +30,7 @@ const urlShortner = async function (req, res) {
 const getUrl = async function(req , res){
     try{
         let urlcode = req.params.urlCode;
-        if(!shortid.isValid(urlcode)){
+        if(!shortId.isValid(urlcode)){
             return res.status(400).send({ status: false, msg: "invalid urlcode" })
         }
         let url = await urlModel.findOne({urlCode : urlcode});
