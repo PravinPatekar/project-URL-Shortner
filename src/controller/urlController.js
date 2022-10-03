@@ -67,7 +67,7 @@ const getUrl = async function(req , res){
             console.log(parseUrl)
             return res.status(302).redirect(parseUrl.longUrl)
         }
-        console.log("roger-roger")
+    
         let url = await urlModel.findOne({urlCode : urlCode});
         if(!url){
             return res
