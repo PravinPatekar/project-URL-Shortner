@@ -1,4 +1,4 @@
-const shortId = require('shortid')
+const shortid = require('shortid')
 const validUrl = require('valid-url')
 const urlModel = require("../model/urlModel")
 const redis = require('redis')
@@ -38,7 +38,7 @@ const urlShortner = async function (req, res) {
         if(findUrl){
             return res.status(409).send({message : "This URL has already being shortened" , data : findUrl})
         }
-        let urlCode = shortId.generate().toLowerCase()
+        let urlCode = shortid.generate().toLowerCase()
         req.body.urlCode = urlCode
         const baseUrl = "http://localhost:3000"
         if (!validUrl.isUri(baseUrl)) return res.status(400).send({ status: false, msg: "invalid baseUrl" })
@@ -56,13 +56,8 @@ const urlShortner = async function (req, res) {
 
 const getUrl = async function(req , res){
     try{
-<<<<<<< HEAD
         let urlCode = req.params.urlCode;
         if(!shortid.isValid(urlCode)){
-=======
-        let urlcode = req.params.urlCode;
-        if(!shortId.isValid(urlcode)){
->>>>>>> 274f435716502d5fe9df9502183e70c0e68e9c35
             return res.status(400).send({ status: false, msg: "invalid urlcode" })
         }
         const cachedUrl= await GET_ASYNC(`${urlCode}`)
