@@ -1,4 +1,3 @@
- const shortid = require('shortid')
 const shortId = require('shortid')
 const validUrl = require('valid-url')
 const urlModel = require("../model/urlModel")
@@ -32,7 +31,7 @@ const redisClient = redis.createClient(
 
 const urlShortner = async function (req, res) {
     try {
-        let { longUrl } = req.body
+        let  longUrl  = req.body.longUrl
         if (!longUrl) return res.status(400).send({ status: false, msg: "provide url" })
         if (!validUrl.isUri(longUrl)) return res.status(400).send({ status: false, msg: "invalid url" })
         let findUrl  = await urlModel.findOne({longUrl: longUrl}).select({longUrl : 1 , urlCode : 1 , shortUrl : 1 , _id : 0});
@@ -57,8 +56,13 @@ const urlShortner = async function (req, res) {
 
 const getUrl = async function(req , res){
     try{
+<<<<<<< HEAD
         let urlCode = req.params.urlCode;
         if(!shortid.isValid(urlCode)){
+=======
+        let urlcode = req.params.urlCode;
+        if(!shortId.isValid(urlcode)){
+>>>>>>> 274f435716502d5fe9df9502183e70c0e68e9c35
             return res.status(400).send({ status: false, msg: "invalid urlcode" })
         }
         const cachedUrl= await GET_ASYNC(`${urlCode}`)
