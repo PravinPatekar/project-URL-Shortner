@@ -3,15 +3,18 @@ const router = express.Router()
 
 const urlController=require("../controller/urlController")
 
+//-----------------(URL Shortening API)----------------------
 
 router.post('/url/shorten',urlController.urlShortner)
 
-router.get("/:urlCode" , urlController.getUrl)
+//-----------------(Redirecting API)
+
+router.get("/:urlCode" , urlController.redirectingUrl)
 
 router.all("*", function (req, res) {
     res.status(404).send({
         status: false,
-        message: "Invalid Url"
+        message: "Endpoint is not correct"
     })
 })
 
