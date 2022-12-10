@@ -16,8 +16,8 @@ const isValidUrl = function (value) {
 // CONNECTING TO REDIS
 
 const redisClient = redis.createClient(
-    13631,
-    "redis-13631.c301.ap-south-1-1.ec2.cloud.redislabs.com",
+    13631,  //port
+    "redis-13631.c301.ap-south-1-1.ec2.cloud.redislabs.com",  //host
     { no_ready_check: true }
 );
 redisClient.auth("wyyIMitZQ2OeeYVP1arHZjBze790bVNX", function (err) {
@@ -90,6 +90,7 @@ const redirectingUrl = async function (req, res) {
         //GETTING URL DATA FROM CACHE MEMORY AND PARSING IT TO JSON FORMAT
         const cachedUrl = await GET_ASYNC(`${urlCode}`)
         const parseUrl = JSON.parse(cachedUrl)
+        console.log(parseUrl)
         if (parseUrl) {
             return res.status(302).redirect(parseUrl.longUrl)
         }
